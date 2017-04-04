@@ -1,0 +1,112 @@
+package com.ultimateguitar.weatherforecast.ui.fragments;
+
+import com.squareup.picasso.Picasso;
+import com.ultimateguitar.weatherforecast.ui.adapter.CityAdapter;
+import com.ultimateguitar.weatherforecast.ui.mvp.BaseFragment;
+import com.ultimateguitar.weatherforecast.ui.mvp.BasePresenter;
+import com.ultimateguitar.weatherforecast.ui.presenter.CityWeatherFragmentPresenter;
+import com.ultimateguitar.weatherforecast.ui.view.CityWeatherFragmentView;
+import com.ultimateguitar.weatherforecast.util.FragmentUtil;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import by.ultimateguitar.weatherforecast.R;
+
+/**
+ * Created by kirila on 4.4.17.
+ */
+
+public class CityWeatherFragment extends BaseFragment implements CityWeatherFragmentView {
+
+    private final int LAYOUT = R.layout.fragment_cities;
+    private static final String EXTRA_CITY_ID = "com.ultimateguitar.weatherforecast.ui.fragments.city_id";
+
+    private CityWeatherFragmentPresenter mPresenter;
+    private CityAdapter mCityAdapter;
+    private int mCityId;
+
+    @BindView(R.id.weather_icon)
+    ImageView mWeatherIcon;
+    @BindView(R.id.city_name)
+    TextView mNameCity;
+    @BindView(R.id.temp)
+    TextView mTemp;
+    @BindView(R.id.humidity)
+    TextView mHumidity;
+    @BindView(R.id.pressure)
+    TextView mPressure;
+
+    @BindView(R.id.city_weather_ll)
+    LinearLayout mCityWeatherLl;
+
+    public static CityWeatherFragment newInstance(int cityId) {
+        CityWeatherFragment fragment = new CityWeatherFragment();
+        Bundle args = new Bundle();
+        args.putInt(EXTRA_CITY_ID, cityId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(LAYOUT, container, false);
+        ButterKnife.bind(this, view);
+        mCityId = getArguments().getInt(EXTRA_CITY_ID);
+        mPresenter.initializeView(mCityId);
+        return view;
+    }
+
+    @OnClick(R.id.city_weather_ll)
+    public void openCityDetails(){
+        FragmentUtil.replaceFragment(getActivity(), R.id.main_fragment_container, WeatherDetailsFragment.newInstance(mCityId), true);
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return mPresenter;
+    }
+
+    @Override
+    protected void createPresenter() {
+        mPresenter = new CityWeatherFragmentPresenter(this);
+    }
+
+    @Override
+    public void setWeatherIcon(String icon) {
+        String url = String.format("http://openweathermap.org/img/w/%s.png", icon);
+        Picasso.with(getContext())
+                .load(url)
+                .into(mWeatherIcon);
+    }
+
+    @Override
+    public void setCityName(String name) {
+        mNameCity.setText(name);
+    }
+
+    @Override
+    public void setTemp(double temp) {
+        mTemp.setText(getResources().getString(R.string.temp) + temp);
+    }
+
+    @Override
+    public void setPressure(double pressure) {
+        mPressure.setText(getResources().getString(R.string.pressure) + pressure);
+    }
+
+    @Override
+    public void setHumidity(int humidity) {
+        mHumidity.setText(getString(R.string.humidity) + humidity + "%");
+    }
+
+}

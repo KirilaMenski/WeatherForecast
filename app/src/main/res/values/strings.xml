@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">WeatherForecast</string>
+    <string name="api_key">6682c14b913c161756463200a81ce3b5</string>
+    <string name="menu">Menu</string>
+    <string name="add">Add city</string>
+    <string name="cancel">Cancel</string>
+    <string name="search">City</string>
+    <string name="temp">Temperature: </string>
+    <string name="pressure">Pressure: </string>
+    <string name="humidity">Humidity: </string>
+    <string name="temp_morn">Temperature morning:</string>
+    <string name="temp_eve">Temperature evening:</string>
+    <string name="temp_day">Temperature day:</string>
+    <string name="temp_night">Temperature night:</string>
+</resources>
