@@ -1,4 +1,4 @@
-package com.ultimateguitar.weatherforecast.database.entity;
+package com.ultimateguitar.weatherforecast.api.response;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -9,6 +9,8 @@ import java.io.Serializable;
  */
 public class Main implements Serializable {
 
+    @SerializedName("id")
+    private int mId;
     @SerializedName("temp")
     private double mTemp;
     @SerializedName("pressure")
@@ -24,12 +26,21 @@ public class Main implements Serializable {
 
     }
 
-    public Main(double temp, double pressure, int humidity, double minTemp, double maxTemp) {
+    public Main(int id, double temp, double pressure, int humidity, double minTemp, double maxTemp) {
+        mId = id;
         mTemp = temp;
         mPressure = pressure;
         mHumidity = humidity;
         mMinTemp = minTemp;
         mMaxTemp = maxTemp;
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int id) {
+        mId = id;
     }
 
     public double getTemp() {

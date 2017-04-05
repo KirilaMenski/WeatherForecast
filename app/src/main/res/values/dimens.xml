@@ -10,8 +10,14 @@
     <dimen name="text_size_medium">20sp</dimen>
     <dimen name="text_size_large">26sp</dimen>
     <dimen name="text_size_xlarge">40sp</dimen>
+
+    <!-- Params -->
     <dimen name="text_padding">10dp</dimen>
     <dimen name="text_margin">10dp</dimen>
     <dimen name="weather_icon_width">100dp</dimen>
     <dimen name="weather_icon_height">100dp</dimen>
+    <dimen name="small_margin">10dp</dimen>
+    <dimen name="textview_width">100dp</dimen>
+    <dimen name="big_margin">40dp</dimen>
+    <dimen name="view_margin">5dp</dimen>
 </resources>

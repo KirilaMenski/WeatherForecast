@@ -1,13 +1,12 @@
 package com.ultimateguitar.weatherforecast.database.daoimpl;
 
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.ultimateguitar.weatherforecast.WeatherForecastApp;
 import com.ultimateguitar.weatherforecast.database.DatabaseHelper;
-import com.ultimateguitar.weatherforecast.database.dao.CityDao;
-import com.ultimateguitar.weatherforecast.database.entity.City;
+import com.ultimateguitar.weatherforecast.database.dao.DailyWeatherDao;
+import com.ultimateguitar.weatherforecast.database.entity.DailyWeather;
 
 import java.lang.ref.WeakReference;
 import java.sql.SQLException;
@@ -17,75 +16,67 @@ import java.util.List;
 import android.content.Context;
 
 /**
- * Created by kirila on 4.4.17.
+ * Created by kirila on 5.4.17.
  */
 
-public class CityDaoImpl implements CityDao {
+public class DailyWeatherDaoImpl implements DailyWeatherDao {
 
-    private static CityDaoImpl mInstance;
+    private static DailyWeatherDaoImpl mInstance;
     private WeakReference<Context> mContext;
     private DatabaseHelper mDatabaseHelper;
-    private Dao<City, Integer> mDao;
+    private Dao<DailyWeather, Integer> mDao;
 
-    public static synchronized CityDaoImpl getInstance() {
+    public static synchronized DailyWeatherDaoImpl getInstance() {
         if (mInstance == null) {
-            mInstance = new CityDaoImpl();
+            mInstance = new DailyWeatherDaoImpl();
         }
         return mInstance;
     }
 
-    private CityDaoImpl() {
+    private DailyWeatherDaoImpl() {
         mContext = new WeakReference<>(WeatherForecastApp.getAppContext());
         mDatabaseHelper = OpenHelperManager.getHelper(mContext.get(), DatabaseHelper.class);
-        mDao = mDatabaseHelper.getCitiesDao();
+        mDao = mDatabaseHelper.getDailyDao();
     }
 
     @Override
-    public void addCity(City city) {
+    public void addWeather(DailyWeather weather) {
         try {
-            mDao.create(city);
+            mDao.create(weather);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void updateCity(City city) {
+    public void deleteWeather(DailyWeather weather) {
         try {
-            mDao.update(city);
+            mDao.delete(weather);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void deleteCity(City city) {
+    public List<DailyWeather> getCurrentWeather() {
+        List<DailyWeather> dailyWeathers = new ArrayList<>();
         try {
-            mDao.delete(city);
+            QueryBuilder<DailyWeather, Integer> queryBuilder = mDao.queryBuilder();
+            dailyWeathers = queryBuilder.query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return dailyWeathers;
     }
 
     @Override
-    public List<City> getAllCities() {
-        List<City> cities = new ArrayList<>();
-        QueryBuilder<City, Integer> queryBuilder = mDao.queryBuilder();
+    public DailyWeather getWeatherByCityId(int cityId) {
+        List<DailyWeather> weatherResponses;
         try {
-            cities = queryBuilder.query();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return cities;
-    }
-
-    @Override
-    public City getCityById(int cityId) {
-        try {
-            QueryBuilder<City, Integer> queryBuilder = mDao.queryBuilder();
+            QueryBuilder<DailyWeather, Integer> queryBuilder = mDao.queryBuilder();
             queryBuilder.where().eq("city_id", cityId);
-            List<City> cities = queryBuilder.query();
-            return (cities.size() > 0) ? cities.get(0) : null;
+            weatherResponses = queryBuilder.query();
+            return (weatherResponses.size() > 0) ? weatherResponses.get(0) : null;
         } catch (SQLException e) {
             e.printStackTrace();
         }

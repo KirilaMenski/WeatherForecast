@@ -1,4 +1,4 @@
-package com.ultimateguitar.weatherforecast.database.entity;
+package com.ultimateguitar.weatherforecast.api.response;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -8,19 +8,14 @@ import java.util.List;
 /**
  * Created by kirila on 4.4.17.
  */
-
 public class WeatherResponse implements Serializable {
 
     @SerializedName("id")
     private int mId;
     @SerializedName("name")
     private String mName;
-    @SerializedName("dt")
-    private long mDt;
-    @SerializedName("coord")
-    private Coordination mCoord;
     @SerializedName("weather")
-    private List<Weather> mWeather;
+    private List<Weather> mWeathers;
     @SerializedName("main")
     private Main mMain;
 
@@ -29,13 +24,10 @@ public class WeatherResponse implements Serializable {
 
     }
 
-    public WeatherResponse(int id, String name, long dt, Coordination coord, List<Weather> weather, Main main) {
+    public WeatherResponse(int id, String name, List<Weather> weather) {
         mId = id;
         mName = name;
-        mDt = dt;
-        mCoord = coord;
-        mWeather = weather;
-        mMain = main;
+        mWeathers = weather;
     }
 
     public int getId() {
@@ -54,28 +46,12 @@ public class WeatherResponse implements Serializable {
         mName = name;
     }
 
-    public long getDt() {
-        return mDt;
+    public List<Weather> getWeathers() {
+        return mWeathers;
     }
 
-    public void setDt(long dt) {
-        mDt = dt;
-    }
-
-    public Coordination getCoord() {
-        return mCoord;
-    }
-
-    public void setCoord(Coordination coord) {
-        mCoord = coord;
-    }
-
-    public List<Weather> getWeather() {
-        return mWeather;
-    }
-
-    public void setWeather(List<Weather> weather) {
-        mWeather = weather;
+    public void setWeathers(List<Weather> weathers) {
+        mWeathers = weathers;
     }
 
     public Main getMain() {

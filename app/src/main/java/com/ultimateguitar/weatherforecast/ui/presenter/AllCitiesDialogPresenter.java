@@ -4,7 +4,7 @@ import com.ultimateguitar.weatherforecast.database.entity.City;
 import com.ultimateguitar.weatherforecast.ui.mvp.BaseContextView;
 import com.ultimateguitar.weatherforecast.ui.mvp.BasePresenter;
 import com.ultimateguitar.weatherforecast.ui.view.AllCitiesDialogView;
-import com.ultimateguitar.weatherforecast.util.CitiesFile;
+import com.ultimateguitar.weatherforecast.util.FileManager;
 
 import org.json.JSONException;
 
@@ -31,7 +31,7 @@ public class AllCitiesDialogPresenter extends BasePresenter {
     public void getAllCities() {
 
         try {
-            List<City> cities = CitiesFile.getCities(mView.getContext());
+            List<City> cities = FileManager.getCities(mView.getContext());
             mView.updateCityRecycler(cities);
         } catch (IOException e) {
             e.printStackTrace();

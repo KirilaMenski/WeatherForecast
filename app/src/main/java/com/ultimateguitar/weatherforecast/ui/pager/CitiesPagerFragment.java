@@ -16,13 +16,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import by.ultimateguitar.weatherforecast.R;
 
 /**
@@ -46,12 +44,6 @@ public class CitiesPagerFragment extends BaseFragment implements CitiesPagerView
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,7 +62,7 @@ public class CitiesPagerFragment extends BaseFragment implements CitiesPagerView
         return new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                return CityWeatherFragment.newInstance(mCities.get(position).getId());
+                return CityWeatherFragment.newInstance(mCities.get(position).getCityId());
             }
 
             @Override
@@ -99,20 +91,9 @@ public class CitiesPagerFragment extends BaseFragment implements CitiesPagerView
         };
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_cities, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.add_city:
-                mPresenter.showDialogCity(getActivity());
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+    @OnClick(R.id.add_city)
+    public void addCity() {
+        mPresenter.showDialogCity(getActivity());
     }
 
     @Override
@@ -132,10 +113,10 @@ public class CitiesPagerFragment extends BaseFragment implements CitiesPagerView
         mCitiesPager.addOnPageChangeListener(getPageListener());
         mCitiesPager.setCurrentItem(mPosition);
         mCitiesPager.setClipToPadding(false);
-        mCitiesPager.setPageMargin(DisplayMetricsUtil.getTypedValue(getContext(), 20));
-        mCitiesPager.setPadding(DisplayMetricsUtil.getTypedValue(getContext(), 50),
+        mCitiesPager.setPageMargin(DisplayMetricsUtil.getTypedValue(getContext(), 10));
+        mCitiesPager.setPadding(DisplayMetricsUtil.getTypedValue(getContext(), 40),
+                DisplayMetricsUtil.getTypedValue(getContext(), 30),
                 DisplayMetricsUtil.getTypedValue(getContext(), 40),
-                DisplayMetricsUtil.getTypedValue(getContext(), 50),
-                DisplayMetricsUtil.getTypedValue(getContext(), 60));
+                DisplayMetricsUtil.getTypedValue(getContext(), 50));
     }
 }

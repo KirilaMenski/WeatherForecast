@@ -17,8 +17,9 @@ import android.content.Context;
  * Created by kirila on 4.4.17.
  */
 
-public class CitiesFile {
+public class FileManager {
 
+    public static final String ICON_PATH = "file:///android_asset/icons/";
     private static final String FILE_NAME = "cities/city.list.txt";
 
 
@@ -36,7 +37,7 @@ public class CitiesFile {
             if (mLine != null) {
                 JSONObject jsonObject = new JSONObject(mLine);
                 City city = new City();
-                city.setId(jsonObject.getInt("_id"));
+                city.setCityId(jsonObject.getInt("_id"));
                 city.setCountry(jsonObject.getString("country"));
                 city.setName(jsonObject.getString("name"));
                 cities.add(city);

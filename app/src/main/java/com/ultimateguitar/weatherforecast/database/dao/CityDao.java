@@ -16,4 +16,6 @@ public interface CityDao {
     void deleteCity(City city);
 
     List<City> getAllCities();
+
+    City getCityById(int cityId);
 }

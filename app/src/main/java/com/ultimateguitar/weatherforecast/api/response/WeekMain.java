@@ -1,4 +1,4 @@
-package com.ultimateguitar.weatherforecast.database.entity;
+package com.ultimateguitar.weatherforecast.api.response;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -10,42 +10,31 @@ import java.util.List;
  */
 public class WeekMain implements Serializable {
 
-    private int mId;
     @SerializedName("temp")
-    private Temperature mTemp;
+    Temperature mTemperatures;
     @SerializedName("pressure")
     private double mPressure;
     @SerializedName("humidity")
     private int mHumidity;
     @SerializedName("weather")
-    private List<Weather> mWeather;
+    private List<Weather> mWeathers;
 
     public WeekMain() {
 
     }
 
-    public WeekMain(int id, Temperature temp, double pressure, List<Weather> weather, int humidity) {
-        mId = id;
-        mTemp = temp;
+    public WeekMain(int id, double pressure, List<Weather> weather, int humidity) {
         mPressure = pressure;
-        mWeather = weather;
+        mWeathers = weather;
         mHumidity = humidity;
     }
 
-    public int getId() {
-        return mId;
+    public Temperature getTemperatures() {
+        return mTemperatures;
     }
 
-    public void setId(int id) {
-        mId = id;
-    }
-
-    public Temperature getTemp() {
-        return mTemp;
-    }
-
-    public void setTemp(Temperature temp) {
-        mTemp = temp;
+    public void setTemperatures(Temperature temperatures) {
+        mTemperatures = temperatures;
     }
 
     public double getPressure() {
@@ -56,12 +45,12 @@ public class WeekMain implements Serializable {
         mPressure = pressure;
     }
 
-    public List<Weather> getWeather() {
-        return mWeather;
+    public List<Weather> getWeathers() {
+        return mWeathers;
     }
 
-    public void setWeather(List<Weather> weather) {
-        mWeather = weather;
+    public void setWeathers(List<Weather> weathers) {
+        mWeathers = weathers;
     }
 
     public int getHumidity() {

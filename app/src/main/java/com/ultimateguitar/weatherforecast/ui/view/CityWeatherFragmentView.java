@@ -9,6 +9,8 @@ public interface CityWeatherFragmentView extends BaseContextView {
 
     void setWeatherIcon(String icon);
 
+    void setDescription(String description);
+
     void setCityName(String name);
 
     void setTemp(double temp);

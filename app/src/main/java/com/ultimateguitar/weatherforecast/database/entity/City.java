@@ -14,36 +14,34 @@ import java.util.Comparator;
 @DatabaseTable(tableName = "cities")
 public class City implements Serializable, Comparator<City> {
 
-    @SerializedName("_id")
-    @DatabaseField(columnName = "id")
+    @DatabaseField(generatedId = true, columnName = "id")
     private int mId;
+    @SerializedName("_id")
+    @DatabaseField(columnName = "city_id")
+    private int mCityId;
     @SerializedName("name")
     @DatabaseField(columnName = "name")
     private String mName;
     @SerializedName("country")
     @DatabaseField(columnName = "country")
     private String mCountry;
-    @SerializedName("coord")
-//    @DatabaseField(columnName = "coord")
-    private Coordination mCoord;
 
     public City() {
 
     }
 
-    public City(int id, String name, String country, Coordination coord) {
-        mId = id;
+    public City(int cityId, String name, String country) {
+        mCityId = cityId;
         mName = name;
         mCountry = country;
-        mCoord = coord;
     }
 
-    public int getId() {
-        return mId;
+    public int getCityId() {
+        return mCityId;
     }
 
-    public void setId(int id) {
-        mId = id;
+    public void setCityId(int id) {
+        mCityId = id;
     }
 
     public String getName() {
@@ -60,14 +58,6 @@ public class City implements Serializable, Comparator<City> {
 
     public void setCountry(String country) {
         mCountry = country;
-    }
-
-    public Coordination getCoord() {
-        return mCoord;
-    }
-
-    public void setCoord(Coordination coord) {
-        mCoord = coord;
     }
 
     @Override

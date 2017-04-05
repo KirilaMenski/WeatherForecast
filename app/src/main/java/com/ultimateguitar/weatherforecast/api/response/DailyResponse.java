@@ -1,4 +1,4 @@
-package com.ultimateguitar.weatherforecast.database.entity;
+package com.ultimateguitar.weatherforecast.api.response;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -11,25 +11,25 @@ import java.util.List;
 
 public class DailyResponse implements Serializable {
 
-    @SerializedName("cnt")
-    private int mCnt;
+    private int mId;
     @SerializedName("list")
     private List<WeekMain> mMains;
 
     public DailyResponse() {
+
     }
 
-    public DailyResponse(int cnt, List<WeekMain> mains) {
-        mCnt = cnt;
+    public DailyResponse(int id, List<WeekMain> mains) {
+        mId = id;
         mMains = mains;
     }
 
-    public int getCnt() {
-        return mCnt;
+    public int getId() {
+        return mId;
     }
 
-    public void setCnt(int cnt) {
-        mCnt = cnt;
+    public void setId(int id) {
+        mId = id;
     }
 
     public List<WeekMain> getMains() {

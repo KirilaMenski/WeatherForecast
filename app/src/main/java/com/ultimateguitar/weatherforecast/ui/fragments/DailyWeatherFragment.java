@@ -1,11 +1,11 @@
 package com.ultimateguitar.weatherforecast.ui.fragments;
 
-import com.ultimateguitar.weatherforecast.database.entity.WeekMain;
+import com.ultimateguitar.weatherforecast.database.entity.MainWeather;
 import com.ultimateguitar.weatherforecast.ui.adapter.WeekWeatherAdapter;
 import com.ultimateguitar.weatherforecast.ui.mvp.BaseFragment;
 import com.ultimateguitar.weatherforecast.ui.mvp.BasePresenter;
-import com.ultimateguitar.weatherforecast.ui.presenter.WeatherDetailsFragmentPresenter;
-import com.ultimateguitar.weatherforecast.ui.view.WeatherDetailsFragmentView;
+import com.ultimateguitar.weatherforecast.ui.presenter.DailyWeatherFragmentPresenter;
+import com.ultimateguitar.weatherforecast.ui.view.DailyWeatherFragmentView;
 
 import java.util.List;
 
@@ -23,21 +23,21 @@ import by.ultimateguitar.weatherforecast.R;
 /**
  * Created by kirila on 4.4.17.
  */
-public class WeatherDetailsFragment extends BaseFragment implements WeatherDetailsFragmentView {
+public class DailyWeatherFragment extends BaseFragment implements DailyWeatherFragmentView {
 
-    private int LAYOUT = R.layout.fragment_city_weather;
+    private int LAYOUT = R.layout.fragment_daily_weather;
 
     private static final String EXTRA_CITY_ID = "com.ultimateguitar.weatherforecast.ui.fragments.city_id";
 
-    private WeatherDetailsFragmentPresenter mPresenter;
+    private DailyWeatherFragmentPresenter mPresenter;
     private WeekWeatherAdapter mWeatherAdapter;
     private int mCityId;
 
     @BindView(R.id.week_weather_recycler)
     RecyclerView mWeekWeatherRecycler;
 
-    public static WeatherDetailsFragment newInstance(int cityId) {
-        WeatherDetailsFragment fragment = new WeatherDetailsFragment();
+    public static DailyWeatherFragment newInstance(int cityId) {
+        DailyWeatherFragment fragment = new DailyWeatherFragment();
         Bundle args = new Bundle();
         args.putInt(EXTRA_CITY_ID, cityId);
         fragment.setArguments(args);
@@ -61,11 +61,11 @@ public class WeatherDetailsFragment extends BaseFragment implements WeatherDetai
 
     @Override
     protected void createPresenter() {
-        mPresenter = new WeatherDetailsFragmentPresenter(this);
+        mPresenter = new DailyWeatherFragmentPresenter(this);
     }
 
     @Override
-    public void updateWeekWeather(List<WeekMain> weekMains) {
+    public void updateWeekWeather(List<MainWeather> weekMains) {
         mWeatherAdapter = new WeekWeatherAdapter(weekMains, getActivity());
         mWeekWeatherRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mWeekWeatherRecycler.setAdapter(mWeatherAdapter);

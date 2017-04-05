@@ -5,11 +5,24 @@
     <string name="add">Add city</string>
     <string name="cancel">Cancel</string>
     <string name="search">City</string>
-    <string name="temp">Temperature: </string>
-    <string name="pressure">Pressure: </string>
-    <string name="humidity">Humidity: </string>
-    <string name="temp_morn">Temperature morning:</string>
-    <string name="temp_eve">Temperature evening:</string>
-    <string name="temp_day">Temperature day:</string>
-    <string name="temp_night">Temperature night:</string>
+    <string name="temp">Temperature: %d C</string>
+    <string name="pressure">Pressure: %d mm Hg</string>
+    <string name="humidity">Humidity: %d \%</string>
+    <string name="temp_morn">Temperature morning: %d C</string>
+    <string name="temp_eve">Temperature evening: %d C</string>
+    <string name="temp_day">Temperature day: %d C</string>
+    <string name="temp_night">Temperature night: %d C</string>
+    <string name="share">Share</string>
+    <string name="share_format">Weather for today %1$s in %2$s is %3$s %4$s</string>
+    <string name="pressure_messure">mm Hg</string>
+    <string name="share_format_item">%1$s, %2$s, %3$s, %4$s</string>
+    <string-array name="week_days">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
 </resources>
