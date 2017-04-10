@@ -22,6 +22,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +49,8 @@ public class AllCitiesDialog extends BaseDialog implements AllCitiesDialogView, 
     EditText mSearchEt;
     @BindView(R.id.cities_recycler)
     RecyclerView mCitiesRecycler;
+    @BindView(R.id.progress_bar)
+    ProgressBar mProgressBar;
 
     private Handler mHandler = new Handler();
     private Runnable mRunnable = new Runnable() {
@@ -132,6 +135,12 @@ public class AllCitiesDialog extends BaseDialog implements AllCitiesDialogView, 
         mCitiesRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mCitiesRecycler.setAdapter(mCityAdapter);
         mCitiesRecycler.getAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void updateViewsVisible(boolean vis) {
+        mCitiesRecycler.setVisibility(vis ? View.GONE : View.VISIBLE);
+        mProgressBar.setVisibility(vis ? View.VISIBLE : View.GONE);
     }
 
     @Override

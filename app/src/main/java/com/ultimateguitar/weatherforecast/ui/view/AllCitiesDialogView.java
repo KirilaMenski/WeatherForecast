@@ -12,4 +12,6 @@ public interface AllCitiesDialogView extends BaseContextView {
 
     void updateCityRecycler(List<City> cities);
 
+    void updateViewsVisible(boolean vis);
+
 }
